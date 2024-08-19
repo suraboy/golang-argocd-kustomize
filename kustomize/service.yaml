@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: golang-argocd-kustomize
+spec:
+  selector:
+    app: golang-argocd-kustomize
+  ports:
+    - port: 8080
+      targetPort: golang-argocd-kustomize

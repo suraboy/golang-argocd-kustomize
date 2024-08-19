@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-argocd-kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-argocd-kustomize
+  template:
+    metadata:
+      labels:
+        app: golang-argocd-kustomize
+    spec:
+      volumes:
+        - name: golang-argocd-kustomize-config
+          configMap:
+            name: golang-argocd-kustomize-config
+      containers:
+        - name: golang-argocd-kustomize
+          image: pay2630/chulassomock
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: golang-argocd-kustomize-config
+          ports:
+            - name: golang-argocd-kustomize
+              containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests:
+              cpu: 20m
+              memory: 100Mi
+            limits:
+              cpu: 80m
+              memory: 200Mi
