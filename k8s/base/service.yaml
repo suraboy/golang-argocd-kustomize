@@ -6,5 +6,6 @@ spec:
   selector:
     app: golang-argocd-kustomize
   ports:
-    - port: 8080
-      targetPort: golang-argocd-kustomize
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,0 +1,6 @@
+bases:
+  - ../../base
+
+images:
+  - name: 0054/golang-argocd-kustomize
+    newTag: 257bf29007e90aafc0fa63eb14f9620d1d260f2b

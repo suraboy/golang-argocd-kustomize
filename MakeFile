@@ -3,3 +3,7 @@ run:
 
 tidy:
 	go mod tidy
+
+apply-k8s:
+	kubectl delete -f argocd/application.yaml 
+	kubectl apply -f argocd/application.yaml 

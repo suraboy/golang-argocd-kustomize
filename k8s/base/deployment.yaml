@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golang-argocd-kustomize
+  labels:
+    app: golang-argocd-kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: golang-argocd-kustomize
+  template:
+    metadata:
+      labels:
+        app: golang-argocd-kustomize
+    spec:
+      containers:
+        - name: golang-argocd-kustomize
+          image: 0054/golang-argocd-kustomize:257bf29007e90aafc0fa63eb14f9620d1d260f2b
+          ports:
+            - containerPort: 8080
