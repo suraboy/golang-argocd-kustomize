@@ -1,0 +1,29 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.22
+
+      - name: Build Docker image
+        run: |
+          docker build -t golang-argocd-kustomize:$GITHUB_SHA .
+
+      - name: Push Docker image to registry
+        run: |
+          echo "${{ secrets.TOKEN }}" | docker login -u "${{secrets.DOCKER_USERNAME}}" -p "${{secrets.DOCKER_PASSWORD}}"
+          docker tag golang-argocd-kustomize:$GITHUB_SHA "${{secrets.DOCKER_USERNAME}}"/golang-argocd-kustomize:$GITHUB_SHA
+          docker push "${{secrets.DOCKER_USERNAME}}"/golang-argocd-kustomize:$GITHUB_SHA
