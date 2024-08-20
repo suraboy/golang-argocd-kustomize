@@ -6,7 +6,7 @@ func main() {
 	router := fiber.New()
 
 	router.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, Fiber!")
+		return c.SendString("golang-argocd-kustomize is start")
 	})
 
 	err := router.Listen(":8080")
