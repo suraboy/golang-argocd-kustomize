@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: golang-argocd-kustomize
-          image: 0054/golang-argocd-kustomize:257bf29007e90aafc0fa63eb14f9620d1d260f2b
+          image: 0054/golang-argocd-kustomize:fabd2a811bdbc47ec052bdd698f66995f9543710
           ports:
             - containerPort: 8080
