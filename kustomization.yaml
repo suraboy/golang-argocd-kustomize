@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: golang-argocd-kustomize # ชื่อของ application
+  namespace: argocd # namespace ที่จะสร้าง resource นี้ ต้องตรงกับ namespace ที่เราติดตั้ง Argo CD ไว้
+spec:
+  destination:
+    namespace: default # deploy ลงไปที่ default namespace
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: base # directory ที่เก็บไฟล์ manifest ไว้
+    repoURL: 'https://github.com/suraboy/golang-argocd-kustomize.git' # Git repo
+    targetRevision: HEAD # จุดใน Git ที่ให้ Argo CD นำไปใช้
+    directory:
+      recurse: true # ให้หาไฟล์ manifest ที่อยู่ใน sub-directory ด้วย
+  project: default
+  syncPolicy:
+    automated:
+      prune: true # ลบ resource ที่ไม่ได้อยู่ใน Git แล้วทิ้ง
+      selfHeal: true # จัดการให้ states ของ cluster เหมือนกับใน manifest โดนอัตโนมัติ

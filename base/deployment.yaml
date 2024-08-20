@@ -18,7 +18,7 @@ spec:
             name: golang-argocd-kustomize-config
       containers:
         - name: golang-argocd-kustomize
-          image: pay2630/chulassomock
+          image: 0054/golang-jenkin
           imagePullPolicy: Always
           envFrom:
             - configMapRef:
